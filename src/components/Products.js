@@ -17,7 +17,7 @@ class Products extends Component {
                                         <h3>{product.subtitle}</h3>
                                         <p>{product.genre}</p>
                                     </div>
-                                    <button>View</button>
+                                    <button>Read more about {product.title}</button>
                                 </li>
                             )
                         })

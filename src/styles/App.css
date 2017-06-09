@@ -2,19 +2,19 @@
 ul.productsContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 ul.productsContainer > li {
-    flex-basis: 20%;
-    margin: 1%;
-    height: 50em;
+    flex-basis: 30%;
+    height: 50%;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: bottom;
     color: white;
     background-color: rgb(50, 50, 50);
     position: relative;
+    margin: 1% 0 1% 0;
 }
 /*text content*/
 
@@ -42,13 +42,15 @@ ul.productsContainer > li > div > p {
 ul.productsContainer > li > button{
     border: none;
     outline: none;
-    background-color: cadetblue;
+    background-color: steelblue;
     color: white;
     height: 2em;
     width: 100%;
     transition: 0.3s;
     font-size: 2em;
     bottom: 0;
+    text-shadow: 0 0 .1em black;
+    font-weight: 800;
     position: absolute;
 
 }
@@ -58,3 +60,19 @@ ul.productsContainer > li > button:hover{
     transform: scale(1.1);
     box-shadow: 0 0 1em black;
 }
+
+
+@media (max-width: 1350px){
+    ul.productsContainer > li {
+        flex-basis: 46%;
+    }
+
+}
+
+@media (max-width: 600px){
+    ul.productsContainer > li {
+        flex-basis: 90%;
+    }
+
+}
+
