@@ -35,7 +35,7 @@ const initialState = {
         },
         2: {
             pid: 2,
-            title: 'Dungeons & Dragons',
+            title: 'D&D',
             subtitle: 'original',
             genre: 'Adventure',
             image: './pics/dd.jpg',
