@@ -1,0 +1,60 @@
+/*PRODUCTS STYLING*/
+ul.productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+ul.productsContainer > li {
+    flex-basis: 20%;
+    margin: 1%;
+    height: 50em;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    color: white;
+    background-color: rgb(50, 50, 50);
+    position: relative;
+}
+/*text content*/
+
+ul.productsContainer > li > div {
+    position: absolute;
+    text-shadow: 0 0 0.1em black;
+    bottom: 3em;
+    background-color: rgba(50, 50, 50, 0.5);
+    width: 94%;
+    padding: 3%;
+    height: 10em;
+}
+
+ul.productsContainer > li > div > h2 {
+    font-size: 2.8em;
+}
+ul.productsContainer > li > div > h3 {
+    font-size: 1.8em;
+}
+ul.productsContainer > li > div > p {
+    font-size: 1.4em;
+}
+
+/*button*/
+ul.productsContainer > li > button{
+    border: none;
+    outline: none;
+    background-color: cadetblue;
+    color: white;
+    height: 2em;
+    width: 100%;
+    transition: 0.3s;
+    font-size: 2em;
+    bottom: 0;
+    position: absolute;
+
+}
+
+ul.productsContainer > li > button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0 0 1em black;
+}

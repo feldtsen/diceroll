@@ -1,0 +1,12 @@
+html, body, ul, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 10px;
+  background-color: azure;
+}
+
+ul {
+  list-style: none;
+}
