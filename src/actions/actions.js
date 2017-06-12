@@ -10,6 +10,16 @@ function changeInputValueAction(target) {
     }
 }
 
+function toggleProductViewAction(viewOpen, pid) {
+    console.log('productclicked');
+    return {
+        type: actionType.TOGGLE_PRODUCT_VIEW_ACTION,
+        open: !viewOpen,
+        pid: pid
+    }
+}
+
 export {
     changeInputValueAction,
+    toggleProductViewAction
 };

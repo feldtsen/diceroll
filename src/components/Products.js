@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import ProductView from './ProductView';
+import { toggleProductViewAction } from '../actions/actions'
 
 class Products extends Component {
     render(){
@@ -17,22 +19,32 @@ class Products extends Component {
                                         <h3>{product.subtitle}</h3>
                                         <p>{product.genre}</p>
                                     </div>
-                                    <button>Read more about {product.title}</button>
+                                    <button name={pid} onClick={this.toggleProductView}>Read more about {product.title}</button>
                                 </li>
                             )
                         })
                     }
                 </ul>
+                {
+                    this.props.viewOpen ? <ProductView close={this.toggleProductView} product={this.props.products[this.props.products.view.pid]} /> : false
+                }
             </div>
         )
     }
+
+    toggleProductView = (e) => {
+        const viewOpen = this.props.viewOpen;
+        this.props.dispatch(toggleProductViewAction(viewOpen, e.target.name));
+    };
+
 }
 
 
 
 function mapStateToProps(state){
     return {
-        products: state.products
+        products: state.products,
+        viewOpen: state.products.view.open
     }
 }
 

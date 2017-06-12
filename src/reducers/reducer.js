@@ -14,6 +14,18 @@ function  rootReducer(state, action) {
 
                }
             };
+        case actionType.TOGGLE_PRODUCT_VIEW_ACTION:
+            return {
+                ...state,
+                products: {
+                    ...state.products,
+                    view: {
+                        ...state.products.view,
+                        open: action.open,
+                        pid: action.pid
+                    }
+                }
+            };
         default:
             return {...state};
     }
