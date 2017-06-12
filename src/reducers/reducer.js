@@ -14,6 +14,43 @@ function  rootReducer(state, action) {
 
                }
             };
+        case actionType.VIEW_PRODUCT_ACTION:
+            return{
+                ...state,
+                products: {
+                    ...state.products,
+                    view: {
+                        ...state.products.view,
+                        open: action.open,
+                        pid: action.name
+                    }
+
+                }
+            };
+        case actionType.OPEN_CART_ACTION:
+            return{
+                ...state,
+                cart: {
+                    ...state.cart,
+                    open:  action.open
+                }
+            };
+        case actionType.ADD_TO_CART_ACTION:
+            return{
+                ...state,
+                cart: {
+                    ...state.cart,
+                    inCart: {
+                        ...state.inCart,
+                        [action.pid]: {
+                            title: state.products[action.pid].title,
+                            price: state.products[action.pid].price
+                        },
+                        sum: state.cart.price + state.products[action.pid].price
+                    },
+                    sum: 0
+                }
+            };
         default:
             return {...state};
     }

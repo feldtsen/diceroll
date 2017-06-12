@@ -1,28 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Play');
+
+
 html, body, ul, h1, h2, h3, p {
   margin: 0;
   padding: 0;
 }
 
 html, body {
+  font-family: 'Play', sans-serif;
   overflow-x: hidden;
   font-size: 10px;
   height: 100%;
   width: 100%;
   background-color: azure;
 }
+button {
+  font-family: 'Play', sans-serif;
+}
 
 ul {
   list-style: none;
 }
 
-#root {
-  height: 100%;
-  width: 100%;
-}
 
-#root > main, #root > main > div,
-#root > main > div > ul {
-  height: inherit;
-  width: inherit;
-}
 

@@ -1,8 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import { openCartAction } from '../actions/actions'
 
-function Header () {
-    return (
-        <h1>Diceroll</h1>
-    )
+class Header extends Component {
+    render(){
+        return (
+            <div className="header">
+                <div>DICEROLL</div>
+                <div onClick={this.openCart}>Cart [{Object.keys(this.props.allItemsInCart).length}]</div>
+            </div>
+        )
+    }
+    openCart = (e) => {
+        const open = this.props.cartOpen;
+        this.props.dispatch(openCartAction(e.target, open));
+    }
 }
-export default Header;
+
+
+
+function mapStateToProps(state) {
+    return {
+        open: state.cart.open,
+        allItemsInCart: state.cart.inCart
+    }
+}
+export default connect(mapStateToProps)(Header);
