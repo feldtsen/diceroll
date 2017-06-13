@@ -2,7 +2,9 @@ import React from 'react';
 
 function Header () {
     return (
-        <h1>Diceroll</h1>
+        <div className="header">
+            <h1 className="logo">DICEROLL</h1>
+        </div>
     )
 }
 export default Header;

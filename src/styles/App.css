@@ -1,3 +1,19 @@
+.header {
+    width: 100%;
+    height: 8%;
+    background-color: cadetblue;
+    position: fixed;
+    z-index: 10;
+    opacity: .9;
+}
+.logo {
+    padding: .5em 0 .5em 2%;
+    font-size: 4em;
+    color: white;
+    text-shadow: 0 0 .1em black;
+
+}
+
 /*PRODUCTS STYLING*/
 ul.productsContainer {
     display: flex;
@@ -7,14 +23,13 @@ ul.productsContainer {
 
 ul.productsContainer > li {
     flex-basis: 30%;
-    height: 50%;
+    margin-bottom: 2%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
     color: white;
     background-color: rgb(50, 50, 50);
     position: relative;
-    margin: 1% 0 1% 0;
 }
 /*text content*/
 
@@ -39,13 +54,13 @@ ul.productsContainer > li > div > p {
 }
 
 /*button*/
-ul.productsContainer > li > button{
+ul.productsContainer > li > button:nth-of-type(1){
     border: none;
     outline: none;
-    background-color: steelblue;
+    background-color: gray;
     color: white;
-    height: 2em;
-    width: 100%;
+    height: 3em;
+    width: 80%;
     transition: 0.3s;
     font-size: 2em;
     bottom: 0;
@@ -54,10 +69,28 @@ ul.productsContainer > li > button{
     position: absolute;
 
 }
+ul.productsContainer > li > button:nth-of-type(2){
+    border: none;
+    outline: none;
+    background-color: cadetblue;
+    color: white;
+    height: 3em;
+    width: 20%;
+    transition: 0.3s;
+    font-size: 2em;
+    bottom: 0;
+    right: 0;
+    text-shadow: 0 0 .1em black;
+    font-weight: 800;
+    position: absolute;
+
+}
 
 ul.productsContainer > li > button:hover{
+    background-color: cadetblue;
     cursor: pointer;
     transform: scale(1.1);
+    z-index: 1;
     box-shadow: 0 0 1em black;
 }
 
@@ -66,14 +99,157 @@ ul.productsContainer > li > button:hover{
 /*PRODUCT VIEW*/
 .productView {
     position: fixed;
+    display: flex;
     left:0;
-    top:0;
+    bottom:0;
     z-index: 100;
     width: 100%;
-    height: 100%;
+    height: 92%;
+    color:white;
     background-color: rgba(30, 30, 30, .9);
+    animation: fade-in .3s;
+    overflow: auto;
+
+}
+.productView > div:nth-of-type(1), .productView > div:nth-of-type(2) {
+    margin: 6em 2% 0 2%
+}
+.productView > div:nth-of-type(1) {
+    flex: 1;
+}
+.productView > div:nth-of-type(1) > img{
+    width: 100%;
+}
+.productView > div:nth-of-type(2) {
+    flex: 3;
 }
 
+.productView > div:nth-of-type(2) > h1 {
+    font-size: 5em;
+}
+
+
+.productView > div:nth-of-type(2) > h2 {
+    font-size: 3em;
+}
+
+
+.productView > div:nth-of-type(2) > p {
+    font-size: 2em;
+    margin: .5em 0 .5em 0;
+}
+
+.productView > div:nth-of-type(2) > p.price {
+    font-size: 3em;
+}
+
+.productView > div:nth-of-type(2) > button {
+    border: none;
+    outline: none;
+    background-color: cadetblue;
+    color: white;
+    height: 2em;
+    width: 10em;
+    transition: 0.3s;
+    font-size: 2em;
+    text-shadow: 0 0 .1em black;
+    font-weight: 800;
+    margin-bottom: 3em;
+}
+.productView > div:nth-of-type(2) > button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0 0 1em black;
+}
+
+
+
+.cart {
+    position: fixed;
+    display: flex;
+    left:0;
+    bottom:0;
+    z-index: 100;
+    width: 100%;
+    height: 92%;
+    color:white;
+    background-color: rgba(30, 30, 30, .9);
+    animation: fade-in .3s;
+}
+
+.close{
+    position: absolute;
+    right: 2%;
+    top: 0.1em;
+    color: indianred;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 800;
+    border: none;
+    transition: .5s;
+    font-size: 5em;
+}
+
+.cartButton {
+    position: fixed;
+    right: 2%;
+    background: none;
+    border: none;
+    outline:none;
+    top: .5em;
+    z-index: 10;
+    font-weight: 800;
+    text-shadow: 0 0 .1em black;
+    color: white;
+    font-size: 4em;
+    transition: .5s;
+
+}
+.cartButton:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.cart > ul {
+    margin-top: 8em;
+    width: 100%;
+}
+.cart > ul > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart > ul > li:nth-of-type(odd) {
+    background-color: rgba(100, 100, 100, 0.5);
+}
+
+.cart > ul > li > p,
+.cart > ul > li > button {
+    flex: 1;
+    margin: 0 3% 0 3%;
+    font-size: 2em;
+}
+.cart > ul > li > p:nth-of-type(2), .cart > ul > li > button{
+    text-align: right;
+}
+.cart > ul > li > button {
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    transition: .5s;
+}
+
+
+.cart > ul > li > button:hover {
+    color: cadetblue;
+    cursor: pointer;
+}
+.close:hover{
+    color: red
+}
 
 @media (max-width: 1350px){
     ul.productsContainer > li {
@@ -86,6 +262,24 @@ ul.productsContainer > li > button:hover{
     ul.productsContainer > li {
         flex-basis: 90%;
     }
+    .productView {
+        flex-direction: column;
+    }
+    .logo {
+        font-size: 2.4em;
+    }
+    .cartButton {
+        font-size: 2.2em;
+    }
 
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
