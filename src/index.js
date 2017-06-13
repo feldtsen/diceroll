@@ -11,23 +11,10 @@ const initialState = {
         meta: {
           height: window.innerHeight
         },
-        tempData: {
-            pid: '',
-            title: '',
-            subtitle:'',
-            genre: '',
-            image: '',
-            description: '',
-            available: 0,
-            price: 0,
-            age: 0
-        },
         fakeAdmin: {
             loggedIn: true
         },
-        history: {
-
-        },
+        history: [],
         products: {
             0: {
                 pid: 0,

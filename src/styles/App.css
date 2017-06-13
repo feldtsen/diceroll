@@ -290,6 +290,31 @@ ul.productsContainer > li > button:hover{
     color: red
 }
 
+
+.history {
+    display: flex;
+    background-color: rgba(50, 50, 50, 0.5);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 100;
+    overflow: auto;
+}
+
+.history > li {
+    height: 100%;
+    width: 20em;
+    color: white;
+    font-size: 2em;
+    margin: .2% .5em 0 .5em;
+}
+
+.history > li:nth-of-type(even) {
+
+}
+
+
+
 @media (max-width: 1350px){
     ul.productsContainer > li {
         flex-basis: 46%;

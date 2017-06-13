@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import ProductView from './ProductView';
 import Cart from './Cart';
-import { toggleProductViewAction,
+import {toggleProductViewAction,
 toggleCartViewAction,
 removeItemFromCartAction ,
 addToCartAction,
 itemHeightAction,
-changeInputAction,
 addNewProductAction} from '../actions/actions'
 
 class Products extends Component {
@@ -22,7 +21,6 @@ class Products extends Component {
             available: 0,
             price: 0,
             age: 0
-
         }
     }
     render(){
@@ -44,7 +42,6 @@ class Products extends Component {
                                 {
                                     this.props.edit? <input onChange={()=>console.log("eddiiitittt")} type="submit" value="edit product"/>: <input onClick={this.addNewProduct} type="submit" value="add product"/>
                                 }
-
                             </li>
                             : ""
                     }
@@ -72,6 +69,7 @@ class Products extends Component {
                 {
                     this.props.cartOpen ? <Cart close={this.toggleCartView} items={this.props.items} products={this.props.products} removeCartItem={this.removeCartItem} sum={this.props.sum}/>: false
                 }
+
             </div>
         )
     }
@@ -111,22 +109,20 @@ class Products extends Component {
     };
 
     changeInput = (e) => {
-        let value = e.target.value,
-            name = e.target.name;
-        if(e.target.name === 'price' || e.target.name === 'available' || e.target.name === 'age')
+        let value = e.target.value;
+        if(e.target.name === 'age' || e.target.name === 'price' || e.target.name === 'available')
             value = Number(value);
-        this.props.dispatch(changeInputAction(name, value));
+        this.setState({[e.target.name]: value});
     };
 
     addNewProduct = () => {
-        if(this.props.tempData.title !== '') {
+        if(this.state.title !== '') {
             let newPid = (new Date().getTime());
-            let newData = this.props.tempData;
-            newData.pid = newPid;
+            let newData = this.state;
             const products = Object.assign(this.props.products, {[newPid]: newData});
             let allProducts = this.props.products.allProducts;
             allProducts.push(newPid);
-            this.props.dispatch(addNewProductAction(products));
+            this.props.dispatch(addNewProductAction(products, newPid));
         }
     };
 
@@ -139,7 +135,6 @@ class Products extends Component {
 
 
 function mapStateToProps(state){
-    console.log(state.products);
     return {
         products: state.products,
         viewOpen: state.products.view.open,

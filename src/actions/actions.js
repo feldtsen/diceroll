@@ -4,7 +4,8 @@ function toggleProductViewAction(viewOpen, pid) {
     return {
         type: actionType.TOGGLE_PRODUCT_VIEW_ACTION,
         open: !viewOpen,
-        pid
+        pid,
+        id: new Date().getTime()
     }
 }
 
@@ -12,27 +13,35 @@ function toggleCartViewAction(viewOpen) {
     return {
         type: actionType.TOGGLE_CART_VIEW_ACTION,
         open: !viewOpen,
+        id: new Date().getTime()
+
     }
 }
 function removeItemFromCartAction(items, price) {
     return {
         type: actionType.REMOVE_ITEM_FROM_CART_ACTION,
         items,
-        price
+        price,
+        id: new Date().getTime()
+
     }
 }
 function addToCartAction(items, price) {
     return {
         type: actionType.ADD_TO_CART_ACTION,
         items,
-        price
+        price,
+        id: new Date().getTime()
+
     }
 }
 
 function loginAction(status) {
     return {
         type: actionType.LOGIN_ACTION,
-        status
+        status,
+        id: new Date().getTime()
+
     }
 }
 
@@ -43,18 +52,12 @@ function itemHeightAction(height) {
     }
 }
 
-
-function changeInputAction(name,value) {
-    return {
-        type: actionType.CHANGE_INPUT_ACTION,
-        name,
-        value
-    }
-}
-function addNewProductAction(products) {
+function addNewProductAction(products, pid) {
     return {
         type: actionType.ADD_NEW_PRODUCT_ACTION,
-        products
+        products,
+        pid,
+        id: new Date().getTime()
     }
 }
 export {
@@ -64,6 +67,5 @@ export {
     addToCartAction,
     loginAction,
     itemHeightAction,
-    changeInputAction,
     addNewProductAction
 };

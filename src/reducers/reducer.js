@@ -12,7 +12,10 @@ function  rootReducer(state, action) {
                         open: action.open,
                         pid: action.pid
                     }
-                }
+                },
+                history: [
+                    ...state.history,
+               ]
             };
         case actionType.TOGGLE_CART_VIEW_ACTION:
             return {
@@ -23,7 +26,8 @@ function  rootReducer(state, action) {
                         ...state.products.view,
                         open: action.open,
                     }
-                }
+                },
+                history: [...state.history, action.type]
             };
         case actionType.REMOVE_ITEM_FROM_CART_ACTION:
             return {
@@ -32,7 +36,8 @@ function  rootReducer(state, action) {
                     ...state.cart,
                     sum: state.cart.sum - action.price,
                     items: action.items
-                }
+                },
+                history: [...state.history, action.type]
             };
         case actionType.ADD_TO_CART_ACTION:
             return {
@@ -41,27 +46,29 @@ function  rootReducer(state, action) {
                     ...state.cart,
                     sum: state.cart.sum + action.price,
                     items: action.items
-                }
+                },
+                history: state.history.concat(action.type)
             };
         case actionType.LOGIN_ACTION:
             return {
                 ...state,
                 fakeAdmin: {
                     loggedIn: action.status
-                }
-            };
-        case actionType.CHANGE_INPUT_ACTION:
-            return {
-                ...state,
-                tempData: {
-                    ...state.tempData,
-                    [action.name]: action.value
-                }
+                },
+                history: [...state.history, action.type]
             };
         case actionType.ADD_NEW_PRODUCT_ACTION:
             return {
                 ...state,
-                products: action.products
+                products: {
+                    ...state.products,
+                    ...action.products,
+                    [action.pid]: {
+                        ...state.products[action.pid],
+                        pid: action.pid
+                    }
+                },
+                history: [...state.history, action.type]
             };
         case actionType.ITEM_HEIGHT_ACTION:
             return {
