@@ -5,12 +5,12 @@ import {} from '../actions/actions'
 class History extends Component {
     render(){
         return (
-            <ul className="history" style={{height: this.props.height * 0.1}}>
+            <ul className="history" style={{height: this.props.height * 0.15}}>
                 {
-                    this.props.history.map((item, i)=>{
+                    this.props.history.slice(0).reverse().map((item)=>{
                         return(
-                            <li key={item.type + i}>
-                                <h3>{i}: {item.type}</h3>
+                            <li key={item.id}>
+                                <h3>{item.id}: {item[item.id]}</h3>
                                 <button>Undo</button>
                             </li>
                         )

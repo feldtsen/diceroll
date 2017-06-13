@@ -13,9 +13,7 @@ function  rootReducer(state, action) {
                         pid: action.pid
                     }
                 },
-                history: [
-                    ...state.history,
-               ]
+                history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.TOGGLE_CART_VIEW_ACTION:
             return {
@@ -27,7 +25,7 @@ function  rootReducer(state, action) {
                         open: action.open,
                     }
                 },
-                history: [...state.history, action.type]
+                history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.REMOVE_ITEM_FROM_CART_ACTION:
             return {
@@ -37,7 +35,7 @@ function  rootReducer(state, action) {
                     sum: state.cart.sum - action.price,
                     items: action.items
                 },
-                history: [...state.history, action.type]
+                history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.ADD_TO_CART_ACTION:
             return {
@@ -47,7 +45,7 @@ function  rootReducer(state, action) {
                     sum: state.cart.sum + action.price,
                     items: action.items
                 },
-                history: state.history.concat(action.type)
+                history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.LOGIN_ACTION:
             return {
@@ -55,7 +53,7 @@ function  rootReducer(state, action) {
                 fakeAdmin: {
                     loggedIn: action.status
                 },
-                history: [...state.history, action.type]
+                history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.ADD_NEW_PRODUCT_ACTION:
             return {
@@ -68,7 +66,7 @@ function  rootReducer(state, action) {
                         pid: action.pid
                     }
                 },
-                history: [...state.history, action.type]
+                history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.ITEM_HEIGHT_ACTION:
             return {

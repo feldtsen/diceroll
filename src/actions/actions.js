@@ -1,11 +1,13 @@
 import * as actionType from './types'
 
+let count = 0;
+
 function toggleProductViewAction(viewOpen, pid) {
     return {
         type: actionType.TOGGLE_PRODUCT_VIEW_ACTION,
         open: !viewOpen,
         pid,
-        id: new Date().getTime()
+        id: count ++
     }
 }
 
@@ -13,7 +15,7 @@ function toggleCartViewAction(viewOpen) {
     return {
         type: actionType.TOGGLE_CART_VIEW_ACTION,
         open: !viewOpen,
-        id: new Date().getTime()
+        id: count++
 
     }
 }
@@ -22,7 +24,7 @@ function removeItemFromCartAction(items, price) {
         type: actionType.REMOVE_ITEM_FROM_CART_ACTION,
         items,
         price,
-        id: new Date().getTime()
+        id: count++
 
     }
 }
@@ -31,7 +33,7 @@ function addToCartAction(items, price) {
         type: actionType.ADD_TO_CART_ACTION,
         items,
         price,
-        id: new Date().getTime()
+        id: count++
 
     }
 }
@@ -40,7 +42,7 @@ function loginAction(status) {
     return {
         type: actionType.LOGIN_ACTION,
         status,
-        id: new Date().getTime()
+        id: count++
 
     }
 }
@@ -57,7 +59,7 @@ function addNewProductAction(products, pid) {
         type: actionType.ADD_NEW_PRODUCT_ACTION,
         products,
         pid,
-        id: new Date().getTime()
+        id: count++
     }
 }
 export {
