@@ -28,9 +28,42 @@ function addToCartAction(items, price) {
         price
     }
 }
+
+function loginAction(status) {
+    return {
+        type: actionType.LOGIN_ACTION,
+        status
+    }
+}
+
+function itemHeightAction(height) {
+    return {
+        type: actionType.ITEM_HEIGHT_ACTION,
+        height
+    }
+}
+
+
+function changeInputAction(name,value) {
+    return {
+        type: actionType.CHANGE_INPUT_ACTION,
+        name,
+        value
+    }
+}
+function addNewProductAction(products) {
+    return {
+        type: actionType.ADD_NEW_PRODUCT_ACTION,
+        products
+    }
+}
 export {
     toggleProductViewAction,
     toggleCartViewAction,
     removeItemFromCartAction,
-    addToCartAction
+    addToCartAction,
+    loginAction,
+    itemHeightAction,
+    changeInputAction,
+    addNewProductAction
 };

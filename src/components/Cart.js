@@ -17,7 +17,7 @@ function ProductView(props) {
                         )
                     })
                 }
-                <li><p>SUM</p><p>{props.sum},- SEK</p><p></p></li>
+                <li><p>SUM</p><p>{props.sum},- SEK</p><p> </p></li>
             </ul>
         </div>
     )

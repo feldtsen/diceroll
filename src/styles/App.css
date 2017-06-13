@@ -4,13 +4,52 @@
     background-color: cadetblue;
     position: fixed;
     z-index: 10;
+    display: flex;
+    align-items: center;
     opacity: .9;
+    text-align: left;
+    text-shadow: 0 0 .1em black;
+
 }
+
+.adminLogin {
+    border: none;
+    cursor: pointer;
+    background: none;
+    padding-left: 2%;
+    outline: none;
+    color: white;
+    transition: 0.3s;
+    font-size: 2em;
+    text-shadow: 0 0 .1em black;
+    font-weight: 800;
+}
+
+.delete {
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+    width: 20%;
+    text-align: center;
+    background-color: cadetblue;
+    text-shadow: 0 0 .1em black;
+    border: none;
+    position: absolute;
+}
+.addProduct {
+    display: flex;
+    flex-direction: column;
+}
+.addProduct > input {
+    flex: 1;
+    font-size: 1.8em;
+}
+
+
 .logo {
     padding: .5em 0 .5em 2%;
     font-size: 4em;
     color: white;
-    text-shadow: 0 0 .1em black;
 
 }
 

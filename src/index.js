@@ -8,6 +8,23 @@ import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
 
 const initialState = {
+        meta: {
+          height: window.innerHeight
+        },
+        tempData: {
+            pid: '',
+            title: '',
+            subtitle:'',
+            genre: '',
+            image: '',
+            description: '',
+            available: 0,
+            price: 0,
+            age: 0
+        },
+        fakeAdmin: {
+            loggedIn: true
+        },
         history: {
 
         },

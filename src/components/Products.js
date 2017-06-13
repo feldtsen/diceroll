@@ -2,24 +2,63 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import ProductView from './ProductView';
 import Cart from './Cart';
-import { toggleProductViewAction, toggleCartViewAction, removeItemFromCartAction , addToCartAction} from '../actions/actions'
+import { toggleProductViewAction,
+toggleCartViewAction,
+removeItemFromCartAction ,
+addToCartAction,
+itemHeightAction,
+changeInputAction,
+addNewProductAction} from '../actions/actions'
 
 class Products extends Component {
+    constructor(){
+        super();
+        this.state = {
+            title: '',
+            subtitle: '',
+            description:'',
+            genre: '',
+            image: '',
+            available: 0,
+            price: 0,
+            age: 0
+
+        }
+    }
     render(){
         return(
             <div>
                 <button className="cartButton" onClick={this.toggleCartView}>Cart {this.props.items.length > 0?`[${this.props.items.length}]`:''}</button>
                 <ul className="productsContainer" style={{paddingTop: window.innerHeight * 0.1}}>
                     {
+                        this.props.fakeAdminStatus?
+                            <li className="addProduct">
+                                <input onChange={this.changeInput} type="text" name="title" placeholder="title"/>
+                                <input onChange={this.changeInput} type="text" name="subtitle" placeholder="subtitle"/>
+                                <input onChange={this.changeInput} type="text" name="genre" placeholder="genre"/>
+                                <input onChange={this.changeInput} type="text" name="image" placeholder="image url"/>
+                                <input onChange={this.changeInput} type="text" name="description" placeholder="description"/>
+                                <input onChange={this.changeInput} type="number" name="available" placeholder="available"/>
+                                <input onChange={this.changeInput} type="text" name="price" placeholder="price"/>
+                                <input onChange={this.changeInput} type="number" name="age" placeholder="age"/>
+                                {
+                                    this.props.edit? <input onChange={()=>console.log("eddiiitittt")} type="submit" value="edit product"/>: <input onClick={this.addNewProduct} type="submit" value="add product"/>
+                                }
+
+                            </li>
+                            : ""
+                    }
+                    {
                         this.props.products.allProducts.map((pid)=>{
                             const product = this.props.products[pid];
                             return(
-                                <li key={pid} style={{backgroundImage: `url(${product.image})`, height: window.innerHeight / 2}}>
+                                <li key={pid} style={{backgroundImage: `url(${product.image})`, height: this.props.itemHeight / 2}}>
                                     <div>
                                         <h2>{product.title}</h2>
                                         <h3>{product.subtitle}</h3>
                                         <p>{product.genre}</p>
                                     </div>
+                                    {this.props.fakeAdminStatus?<input type="submit" className="delete" defaultValue="delete" />: ''}
                                     <button name={pid} onClick={this.toggleProductView}>Read more about {product.title}</button>
                                     <button name={pid} onClick={this.addToCart}>+</button>
                                 </li>
@@ -36,6 +75,12 @@ class Products extends Component {
             </div>
         )
     }
+    componentDidMount() {
+        window.addEventListener('resize', this.responsiveChecker);
+    }
+    componentWillUnmount(){
+        window.removeEventListener('resize', this.responsiveChecker);
+    }
 
     toggleProductView = (e) => {
         const viewOpen = this.props.viewOpen;
@@ -51,30 +96,59 @@ class Products extends Component {
         let items = this.props.items,
         index = e.target.name;
         items.splice(index, 1);
-        const updatedItems = [].concat(items);
-        const price = this.props.products[e.target.className].price;
+        const updatedItems = [].concat(items),
+
+        price = this.props.products[e.target.className].price;
+
         this.props.dispatch(removeItemFromCartAction(updatedItems, price));
     };
 
     addToCart = (e) => {
         let items = this.props.items;
         items.push(e.target.name);
-        console.log(items);
         const price = this.props.products[e.target.name].price;
         this.props.dispatch(addToCartAction(items, price));
-    }
+    };
 
+    changeInput = (e) => {
+        let value = e.target.value,
+            name = e.target.name;
+        if(e.target.name === 'price' || e.target.name === 'available' || e.target.name === 'age')
+            value = Number(value);
+        this.props.dispatch(changeInputAction(name, value));
+    };
+
+    addNewProduct = () => {
+        if(this.props.tempData.title !== '') {
+            let newPid = (new Date().getTime());
+            let newData = this.props.tempData;
+            newData.pid = newPid;
+            const products = Object.assign(this.props.products, {[newPid]: newData});
+            let allProducts = this.props.products.allProducts;
+            allProducts.push(newPid);
+            this.props.dispatch(addNewProductAction(products));
+        }
+    };
+
+    responsiveChecker = () => {
+        const height = window.innerHeight;
+        this.props.dispatch(itemHeightAction(height))
+    };
 }
 
 
 
 function mapStateToProps(state){
+    console.log(state.products);
     return {
         products: state.products,
         viewOpen: state.products.view.open,
         cartOpen: state.cart.view.open,
         sum: state.cart.sum,
-        items: state.cart.items
+        items: state.cart.items,
+        fakeAdminStatus: state.fakeAdmin.loggedIn,
+        itemHeight: state.meta.height,
+        tempData: state.tempData
     }
 }
 

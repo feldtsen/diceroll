@@ -43,6 +43,34 @@ function  rootReducer(state, action) {
                     items: action.items
                 }
             };
+        case actionType.LOGIN_ACTION:
+            return {
+                ...state,
+                fakeAdmin: {
+                    loggedIn: action.status
+                }
+            };
+        case actionType.CHANGE_INPUT_ACTION:
+            return {
+                ...state,
+                tempData: {
+                    ...state.tempData,
+                    [action.name]: action.value
+                }
+            };
+        case actionType.ADD_NEW_PRODUCT_ACTION:
+            return {
+                ...state,
+                products: action.products
+            };
+        case actionType.ITEM_HEIGHT_ACTION:
+            return {
+                ...state,
+                meta: {
+                    height: action.height
+                }
+            };
+
         default:
             return {...state};
     }
