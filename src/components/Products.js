@@ -8,20 +8,29 @@ removeItemFromCartAction ,
 addToCartAction,
 itemHeightAction,
 addNewProductAction,
-deleteProductAction} from '../actions/actions'
+deleteProductAction,
+editProductAction} from '../actions/actions'
 
 class Products extends Component {
     constructor(){
         super();
         this.state = {
-            title: '',
-            subtitle: '',
-            description:'',
-            genre: '',
-            image: '',
-            available: 0,
-            price: 0,
-            age: 0
+            product: {
+                title: '',
+                subtitle: '',
+                description:'',
+                genre: '',
+                image: '',
+                available: '',
+                price: '',
+                age: '',
+                pid: '',
+            },
+            meta: {
+                edit: false,
+                editing: false
+            }
+
         }
     }
     render(){
@@ -32,16 +41,16 @@ class Products extends Component {
                     {
                         this.props.fakeAdminStatus?
                             <li className="addProduct">
-                                <input onChange={this.changeInput} type="text" name="title" placeholder="title"/>
-                                <input onChange={this.changeInput} type="text" name="subtitle" placeholder="subtitle"/>
-                                <input onChange={this.changeInput} type="text" name="genre" placeholder="genre"/>
-                                <input onChange={this.changeInput} type="text" name="image" placeholder="image url"/>
-                                <input onChange={this.changeInput} type="text" name="description" placeholder="description"/>
-                                <input onChange={this.changeInput} type="number" name="available" placeholder="available"/>
-                                <input onChange={this.changeInput} type="text" name="price" placeholder="price"/>
-                                <input onChange={this.changeInput} type="number" name="age" placeholder="age"/>
+                                <input onChange={this.changeInput} value={this.state.product.title} type="text" name="title" placeholder="title"/>
+                                <input onChange={this.changeInput} value={this.state.product.subtitle} type="text" name="subtitle" placeholder="subtitle"/>
+                                <input onChange={this.changeInput} value={this.state.product.genre} type="text" name="genre" placeholder="genre"/>
+                                <input onChange={this.changeInput} value={this.state.product.image} type="text" name="image" placeholder="image url"/>
+                                <input onChange={this.changeInput} value={this.state.product.description} type="text" name="description" placeholder="description"/>
+                                <input onChange={this.changeInput} value={this.state.product.available} type="number" name="available" placeholder="available"/>
+                                <input onChange={this.changeInput} value={this.state.product.price} type="text" name="price" placeholder="price"/>
+                                <input onChange={this.changeInput} value={this.state.product.age} type="number" name="age" placeholder="age"/>
                                 {
-                                    this.props.edit? <input onChange={()=>console.log("eddiiitittt")} type="submit" value="edit product"/>: <input onClick={this.addNewProduct} type="submit" value="add product"/>
+                                    this.state.meta.edit? <input type="submit" className="doneEditButton" value="Done editing" onClick={this.editProduct}/>: <input className="addNewProductButton" onClick={this.addNewProduct} type="submit" value="add product"/>
                                 }
                             </li>
                             : ""
@@ -56,8 +65,8 @@ class Products extends Component {
                                         <h3>{product.subtitle}</h3>
                                         <p>{product.genre}</p>
                                     </div>
-                                    {this.props.fakeAdminStatus?<input type="submit" name={pid} onClick={this.deleteProduct} className="delete" defaultValue="delete" />: ''}
-                                    {this.props.fakeAdminStatus?<input type="submit" name={pid} onClick={()=>console.log('hei')} className="edit" defaultValue="edit" />: ''}
+                                    {this.props.fakeAdminStatus?!this.state.meta.edit?<input type="submit" name={pid} onClick={this.deleteProduct} className="delete" defaultValue="delete" />:'': ''}
+                                    {this.props.fakeAdminStatus?!this.state.meta.edit?<input type="submit" name={pid} onClick={this.setEditInformation} className="edit" defaultValue="edit" />:'': ''}
                                     <button name={pid} onClick={this.toggleProductView}>Read more about {product.title}</button>
                                     <button name={pid} onClick={this.addToCart}>+</button>
                                 </li>
@@ -117,13 +126,15 @@ class Products extends Component {
         let value = e.target.value;
         if(e.target.name === 'age' || e.target.name === 'price' || e.target.name === 'available')
             value = Number(value);
-        this.setState({[e.target.name]: value});
+        let inputChange = this.state.product;
+        inputChange[e.target.name] = value;
+        this.setState(inputChange);
     };
 
     addNewProduct = () => {
-        if(this.state.title !== '') {
+        if(this.state.product.title !== '') {
             let newPid = (new Date().getTime());
-            let newData = this.state;
+            let newData = this.state.product;
             const products = Object.assign(this.props.products, {[newPid]: newData});
             let allProducts = this.props.products.allProducts;
             allProducts.push(newPid);
@@ -141,9 +152,28 @@ class Products extends Component {
 
     };
 
-    editProducts = (e) => {
-
+    editProduct = () => {
+        const newProduct = this.state.product;
+        this.setState({
+            product: {
+                title: '', subtitle: '', description:'', genre: '', image: '', available: '', price: '', age: ''
+            },
+            meta: {
+                edit: false
+            }
+        });
+        this.props.dispatch(editProductAction(newProduct));
     };
+
+    setEditInformation = (e) => {
+        const pid = e.target.name,
+            product = this.props.products[pid];
+        let newState = this.state;
+        newState.product = product;
+        newState.meta.edit = true;
+        this.setState(newState);
+    };
+
 
 
     responsiveChecker = () => {
@@ -155,6 +185,7 @@ class Products extends Component {
 
 
 function mapStateToProps(state){
+    console.log(state.products);
     return {
         products: state.products,
         viewOpen: state.products.view.open,

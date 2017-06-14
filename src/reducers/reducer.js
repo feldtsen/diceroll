@@ -91,6 +91,15 @@ function  rootReducer(state, action) {
                 },
                 history: state.history.concat({[action.id]: action.type, id: action.id})
             };
+        case actionType.EDIT_PRODUCT_ACTION:
+            return {
+                ...state,
+                products: {
+                    ...state.products,
+                    [action.products.pid]: action.products
+                },
+                history: state.history.concat({[action.id]: action.type, id: action.id})
+            };
         case actionType.ITEM_HEIGHT_ACTION:
             return {
                 ...state,

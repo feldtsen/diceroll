@@ -79,7 +79,13 @@ function deleteProductAction(products) {
         id: count++
     }
 }
-
+function editProductAction(products) {
+    return{
+        type: actionType.EDIT_PRODUCT_ACTION,
+        products,
+        id: count++
+    }
+}
 export {
     toggleProductViewAction,
     toggleCartViewAction,
@@ -89,5 +95,6 @@ export {
     itemHeightAction,
     addNewProductAction,
     historyOpenAction,
-    deleteProductAction
+    deleteProductAction,
+    editProductAction
 };

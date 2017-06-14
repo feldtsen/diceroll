@@ -10,7 +10,7 @@ class History extends Component {
                 <ul className="history" style={{height: this.props.historyOpen? this.props.height * 0.15 + 'px': '0px'}}>
                     {
                         this.props.history.slice(0).reverse().map((item)=>{
-                            const filter = item[item.id]=== 'ADD_TO_CART' || item[item.id] === 'REMOVE_ITEM_FROM_CART' || item[item.id] === 'ADD_NEW_PRODUCT';
+                            const filter = item[item.id]=== 'ADD_TO_CART' || item[item.id] === 'REMOVE_ITEM_FROM_CART' || item[item.id] === 'ADD_NEW_PRODUCT' || item[item.id] === 'EDIT_PRODUCT' || item[item.id] === 'DELETE_PRODUCT';
                             return(
                                 <li key={item.id} style={{color: filter?'':'cadetblue'}}>
                                     <h3>{item.id}: {item[item.id]}</h3>

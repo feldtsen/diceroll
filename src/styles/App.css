@@ -54,6 +54,37 @@
 .edit:hover {
     background-color: green;
 }
+
+
+.doneEditButton{
+    font-size: 3em;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    background-color: indianred;
+    text-shadow: 0 0 .1em black;
+    border: none;
+    transition: .5s;
+
+}
+.doneEditButton:hover{
+    background-color: red;
+}
+
+.addNewProductButton {
+    font-size: 3em;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    background-color: darkgreen;
+    text-shadow: 0 0 .1em black;
+    border: none;
+    transition: .5s;
+}
+.addNewProductButton:hover {
+    background-color: green;
+}
+
 .addProduct {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -433,6 +464,7 @@ ul.productsContainer > li > button:hover{
 .history > li:nth-of-type(odd) {
     background-color: rgba(30, 30, 30, 0.3);
 }
+
 
 
 
