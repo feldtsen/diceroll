@@ -89,6 +89,11 @@ function  rootReducer(state, action) {
                     ...state.products,
                     ...action.products
                 },
+                cart: {
+                    ...state.cart,
+                    items: [],
+                    sum: 0
+                },
                 history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.EDIT_PRODUCT_ACTION:

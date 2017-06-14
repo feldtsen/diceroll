@@ -155,12 +155,8 @@ class Products extends Component {
     editProduct = () => {
         const newProduct = this.state.product;
         this.setState({
-            product: {
-                title: '', subtitle: '', description:'', genre: '', image: '', available: '', price: '', age: ''
-            },
-            meta: {
-                edit: false
-            }
+            product: {title: '', subtitle: '', description:'', genre: '', image: '', available: '', price: '', age: ''},
+            meta: {edit: false}
         });
         this.props.dispatch(editProductAction(newProduct));
     };
@@ -174,8 +170,6 @@ class Products extends Component {
         this.setState(newState);
     };
 
-
-
     responsiveChecker = () => {
         const height = window.innerHeight;
         this.props.dispatch(itemHeightAction(height))
@@ -185,7 +179,6 @@ class Products extends Component {
 
 
 function mapStateToProps(state){
-    console.log(state.products);
     return {
         products: state.products,
         viewOpen: state.products.view.open,

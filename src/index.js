@@ -13,7 +13,7 @@ const initialState = {
             historyOpen: false
         },
         fakeAdmin: {
-            loggedIn: true
+            loggedIn: false
         },
         history: [],
         products: {
