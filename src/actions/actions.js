@@ -7,7 +7,7 @@ function toggleProductViewAction(viewOpen, pid) {
         type: actionType.TOGGLE_PRODUCT_VIEW_ACTION,
         open: !viewOpen,
         pid,
-        id: count ++
+        id: count++
     }
 }
 
@@ -62,6 +62,14 @@ function addNewProductAction(products, pid) {
         id: count++
     }
 }
+
+function historyOpenAction(open) {
+    return {
+        type: actionType.HISTORY_OPEN_ACTION,
+        open
+    }
+}
+
 export {
     toggleProductViewAction,
     toggleCartViewAction,
@@ -69,5 +77,6 @@ export {
     addToCartAction,
     loginAction,
     itemHeightAction,
-    addNewProductAction
+    addNewProductAction,
+    historyOpenAction
 };

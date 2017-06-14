@@ -9,7 +9,8 @@ import './styles/index.css';
 
 const initialState = {
         meta: {
-          height: window.innerHeight
+            height: window.innerHeight,
+            historyOpen: false
         },
         fakeAdmin: {
             loggedIn: true

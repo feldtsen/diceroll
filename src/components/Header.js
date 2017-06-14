@@ -7,7 +7,7 @@ class Header extends Component {
         return (
             <div className="header">
                 <h1 className="logo">DICEROLL</h1>
-                <button className="adminLogin" onClick={this.adminLogin}>Admin Test</button>
+                <button className="adminLogin" onClick={this.adminLogin}  style={{bottom: this.props.historyOpen? this.props.height * 0.15 + 'px': 0}}>Admin Test</button>
             </div>
         )
     }
@@ -20,7 +20,9 @@ class Header extends Component {
 
 function mapStateToProps(state) {
     return {
-        fakeAdmin:state.fakeAdmin
+        fakeAdmin:state.fakeAdmin,
+        height: state.meta.height,
+        historyOpen: state.meta.historyOpen
     }
 }
 export default connect(mapStateToProps)(Header);

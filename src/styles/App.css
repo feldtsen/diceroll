@@ -4,7 +4,11 @@
     background-color: cadetblue;
     position: fixed;
     z-index: 10;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     opacity: .9;
     text-align: left;
@@ -13,34 +17,55 @@
 }
 
 .adminLogin {
-    border: none;
-    cursor: pointer;
-    background: none;
-    padding-left: 2%;
-    outline: none;
+    position: fixed;
+    left: 2%;
+    border:none;
+    background-color: rgba(50, 50, 50, 0.9);
+    -webkit-transition: .5s;
+    transition: .5s;
     color: white;
-    transition: 0.3s;
-    font-size: 2em;
-    text-shadow: 0 0 .1em black;
-    font-weight: 800;
+    font-size: 2.5em;
+    outline: none;
+}
+.adminLogin:hover {
+    color: cadetblue;
+    cursor: pointer;
 }
 
-.delete {
-    font-size: 2em;
+.delete, .edit {
+    font-size: 3em;
     color: white;
     cursor: pointer;
-    width: 20%;
+    width: 3em;
     text-align: center;
-    background-color: cadetblue;
+    background-color: indianred;
     text-shadow: 0 0 .1em black;
     border: none;
     position: absolute;
+    transition: .5s;
+}
+.edit {
+    margin-left: 3em;
+    background-color: darkgreen;
+}
+.delete:hover {
+    background-color: red;
+}
+.edit:hover {
+    background-color: green;
 }
 .addProduct {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 .addProduct > input {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     font-size: 1.8em;
 }
@@ -55,12 +80,18 @@
 
 /*PRODUCTS STYLING*/
 ul.productsContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
+    margin-bottom: 3em;
 }
 
 ul.productsContainer > li {
+    -ms-flex-preferred-size: 30%;
     flex-basis: 30%;
     margin-bottom: 2%;
     background-size: cover;
@@ -100,6 +131,7 @@ ul.productsContainer > li > button:nth-of-type(1){
     color: white;
     height: 3em;
     width: 80%;
+    -webkit-transition: 0.3s;
     transition: 0.3s;
     font-size: 2em;
     bottom: 0;
@@ -115,6 +147,7 @@ ul.productsContainer > li > button:nth-of-type(2){
     color: white;
     height: 3em;
     width: 20%;
+    -webkit-transition: 0.3s;
     transition: 0.3s;
     font-size: 2em;
     bottom: 0;
@@ -128,8 +161,10 @@ ul.productsContainer > li > button:nth-of-type(2){
 ul.productsContainer > li > button:hover{
     background-color: cadetblue;
     cursor: pointer;
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
     z-index: 1;
+    -webkit-box-shadow: 0 0 1em black;
     box-shadow: 0 0 1em black;
 }
 
@@ -138,28 +173,39 @@ ul.productsContainer > li > button:hover{
 /*PRODUCT VIEW*/
 .productView {
     position: fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     left:0;
     bottom:0;
-    z-index: 100;
+    z-index: 2;
     width: 100%;
     height: 92%;
     color:white;
     background-color: rgba(30, 30, 30, .9);
+    -webkit-animation: fade-in .3s;
     animation: fade-in .3s;
-    overflow: auto;
 
 }
+.productView > div {
+    overflow: auto;
+}
+
 .productView > div:nth-of-type(1), .productView > div:nth-of-type(2) {
     margin: 6em 2% 0 2%
 }
 .productView > div:nth-of-type(1) {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
+    overflow: hidden;
 }
 .productView > div:nth-of-type(1) > img{
     width: 100%;
 }
 .productView > div:nth-of-type(2) {
+    -webkit-box-flex: 3;
+    -ms-flex: 3;
     flex: 3;
 }
 
@@ -189,6 +235,7 @@ ul.productsContainer > li > button:hover{
     color: white;
     height: 2em;
     width: 10em;
+    -webkit-transition: 0.3s;
     transition: 0.3s;
     font-size: 2em;
     text-shadow: 0 0 .1em black;
@@ -197,7 +244,9 @@ ul.productsContainer > li > button:hover{
 }
 .productView > div:nth-of-type(2) > button:hover {
     cursor: pointer;
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
+    -webkit-box-shadow: 0 0 1em black;
     box-shadow: 0 0 1em black;
 }
 
@@ -205,14 +254,17 @@ ul.productsContainer > li > button:hover{
 
 .cart {
     position: fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     left:0;
     bottom:0;
-    z-index: 100;
+    z-index: 3;
     width: 100%;
     height: 92%;
     color:white;
     background-color: rgba(30, 30, 30, .9);
+    -webkit-animation: fade-in .3s;
     animation: fade-in .3s;
 }
 
@@ -226,6 +278,7 @@ ul.productsContainer > li > button:hover{
     cursor: pointer;
     font-weight: 800;
     border: none;
+    -webkit-transition: .5s;
     transition: .5s;
     font-size: 5em;
 }
@@ -242,22 +295,36 @@ ul.productsContainer > li > button:hover{
     text-shadow: 0 0 .1em black;
     color: white;
     font-size: 4em;
+    -webkit-transition: .5s;
     transition: .5s;
 
 }
 .cartButton:hover {
     cursor: pointer;
+    -webkit-transform: scale(1.2);
     transform: scale(1.2);
 }
 
 .cart > ul {
     margin-top: 8em;
     width: 100%;
+    overflow: auto;
+
 }
 .cart > ul > li {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+}
+
+.cart > ul > li:last-child {
+    margin-bottom: 8em;
 }
 
 .cart > ul > li:nth-of-type(odd) {
@@ -266,6 +333,8 @@ ul.productsContainer > li > button:hover{
 
 .cart > ul > li > p,
 .cart > ul > li > button {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     margin: 0 3% 0 3%;
     font-size: 2em;
@@ -278,6 +347,7 @@ ul.productsContainer > li > button:hover{
     border: none;
     color: white;
     outline: none;
+    -webkit-transition: .5s;
     transition: .5s;
 }
 
@@ -290,8 +360,27 @@ ul.productsContainer > li > button:hover{
     color: red
 }
 
+.historyToggleButton {
+    position: fixed;
+    right: 2%;
+    border: none;
+    background-color: rgba(50, 50, 50, 0.9);
+    -webkit-transition: .5s;
+    transition: .5s;
+    color: white;
+    font-size: 2.5em;
+    outline: none;
+    z-index: 100;
+}
+
+.historyToggleButton:hover {
+    color: cadetblue;
+    cursor: pointer;
+}
 
 .history {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: rgba(50, 50, 50, 0.9);
     position: fixed;
@@ -299,33 +388,57 @@ ul.productsContainer > li > button:hover{
     bottom: 0;
     z-index: 100;
     overflow: auto;
+    -webkit-transition: .5s;
+    transition: .5s;
 }
 
 .history > li {
     height: 100%;
-    width: 20em;
+    min-width: 20em;
     color: white;
     font-size: 1.5em;
     margin: 0 .5em 0 .5em;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -ms-flex-direction:column;
     flex-direction:column;
 
 }
 
-.history > li > h3,
 .history > li > button{
-
+    width: 80%;
+    background: none;
+    -webkit-transition: .5s;
+    transition: .5s;
+    color: white;
+    font-size: 1.6em;
+    border: .1em solid white;
+    outline: none;
+}
+.history > li > button:hover{
+    color: cadetblue;
+    border: .1em solid cadetblue;
+    cursor: pointer;
 }
 
-.history > li:nth-of-type(even) {
-
+.history > li:nth-of-type(odd) {
+    background-color: rgba(30, 30, 30, 0.3);
 }
 
 
 
 @media (max-width: 1350px){
     ul.productsContainer > li {
+        -ms-flex-preferred-size: 46%;
         flex-basis: 46%;
     }
 
@@ -333,9 +446,13 @@ ul.productsContainer > li > button:hover{
 
 @media (max-width: 600px){
     ul.productsContainer > li {
+        -ms-flex-preferred-size: 90%;
         flex-basis: 90%;
     }
     .productView {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
     }
     .logo {
@@ -347,7 +464,7 @@ ul.productsContainer > li > button:hover{
 
 }
 
-@keyframes fade-in {
+@-webkit-keyframes fade-in {
     0% {
         opacity: 0;
     }
@@ -356,3 +473,11 @@ ul.productsContainer > li > button:hover{
     }
 }
 
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -56,6 +56,7 @@ class Products extends Component {
                                         <p>{product.genre}</p>
                                     </div>
                                     {this.props.fakeAdminStatus?<input type="submit" className="delete" defaultValue="delete" />: ''}
+                                    {this.props.fakeAdminStatus?<input type="submit" className="edit" defaultValue="edit" />: ''}
                                     <button name={pid} onClick={this.toggleProductView}>Read more about {product.title}</button>
                                     <button name={pid} onClick={this.addToCart}>+</button>
                                 </li>

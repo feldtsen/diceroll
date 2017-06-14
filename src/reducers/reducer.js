@@ -75,7 +75,14 @@ function  rootReducer(state, action) {
                     height: action.height
                 }
             };
-
+        case actionType.HISTORY_OPEN_ACTION:
+            return {
+                ...state,
+                meta: {
+                    ...state.meta,
+                    historyOpen: action.open
+                }
+            };
         default:
             return {...state};
     }
