@@ -7,7 +7,8 @@ toggleCartViewAction,
 removeItemFromCartAction ,
 addToCartAction,
 itemHeightAction,
-addNewProductAction} from '../actions/actions'
+addNewProductAction,
+deleteProductAction} from '../actions/actions'
 
 class Products extends Component {
     constructor(){
@@ -55,8 +56,8 @@ class Products extends Component {
                                         <h3>{product.subtitle}</h3>
                                         <p>{product.genre}</p>
                                     </div>
-                                    {this.props.fakeAdminStatus?<input type="submit" className="delete" defaultValue="delete" />: ''}
-                                    {this.props.fakeAdminStatus?<input type="submit" className="edit" defaultValue="edit" />: ''}
+                                    {this.props.fakeAdminStatus?<input type="submit" name={pid} onClick={this.deleteProduct} className="delete" defaultValue="delete" />: ''}
+                                    {this.props.fakeAdminStatus?<input type="submit" name={pid} onClick={()=>console.log('hei')} className="edit" defaultValue="edit" />: ''}
                                     <button name={pid} onClick={this.toggleProductView}>Read more about {product.title}</button>
                                     <button name={pid} onClick={this.addToCart}>+</button>
                                 </li>
@@ -96,17 +97,20 @@ class Products extends Component {
         index = e.target.name;
         items.splice(index, 1);
         const updatedItems = [].concat(items),
+        pid = e.target.className,
+        price = this.props.products[pid].price;
 
-        price = this.props.products[e.target.className].price;
-
-        this.props.dispatch(removeItemFromCartAction(updatedItems, price));
+        this.props.dispatch(removeItemFromCartAction(updatedItems, price, pid));
     };
 
     addToCart = (e) => {
         let items = this.props.items;
-        items.push(e.target.name);
-        const price = this.props.products[e.target.name].price;
-        this.props.dispatch(addToCartAction(items, price));
+        const pid = e.target.name;
+        if(this.props.products[pid].available !== 0){
+            items.push(pid);
+            const price = this.props.products[pid].price;
+            this.props.dispatch(addToCartAction(items, price, pid));
+        }
     };
 
     changeInput = (e) => {
@@ -126,6 +130,21 @@ class Products extends Component {
             this.props.dispatch(addNewProductAction(products, newPid));
         }
     };
+
+    deleteProduct = (e) => {
+        const productPid = Number(e.target.name);
+        let products = this.props.products;
+        const index = products.allProducts.indexOf(productPid);
+        delete products[productPid];
+         products.allProducts.splice(index, 1);
+        this.props.dispatch(deleteProductAction(products));
+
+    };
+
+    editProducts = (e) => {
+
+    };
+
 
     responsiveChecker = () => {
         const height = window.innerHeight;

@@ -19,21 +19,23 @@ function toggleCartViewAction(viewOpen) {
 
     }
 }
-function removeItemFromCartAction(items, price) {
+function removeItemFromCartAction(items, price, pid) {
     return {
         type: actionType.REMOVE_ITEM_FROM_CART_ACTION,
         items,
         price,
-        id: count++
+        id: count++,
+        pid
 
     }
 }
-function addToCartAction(items, price) {
+function addToCartAction(items, price, pid) {
     return {
         type: actionType.ADD_TO_CART_ACTION,
         items,
         price,
-        id: count++
+        id: count++,
+        pid
 
     }
 }
@@ -58,7 +60,7 @@ function addNewProductAction(products, pid) {
     return {
         type: actionType.ADD_NEW_PRODUCT_ACTION,
         products,
-        pid,
+        pid: Number(pid),
         id: count++
     }
 }
@@ -70,6 +72,14 @@ function historyOpenAction(open) {
     }
 }
 
+function deleteProductAction(products) {
+    return {
+        type: actionType.DELETE_PRODUCT_ACTION,
+        products,
+        id: count++
+    }
+}
+
 export {
     toggleProductViewAction,
     toggleCartViewAction,
@@ -78,5 +88,6 @@ export {
     loginAction,
     itemHeightAction,
     addNewProductAction,
-    historyOpenAction
+    historyOpenAction,
+    deleteProductAction
 };

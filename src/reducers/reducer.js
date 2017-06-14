@@ -35,6 +35,13 @@ function  rootReducer(state, action) {
                     sum: state.cart.sum - action.price,
                     items: action.items
                 },
+                products: {
+                    ...state.products,
+                    [action.pid]: {
+                        ...state.products[action.pid],
+                        available: state.products[action.pid].available + 1
+                    }
+                },
                 history: state.history.concat({[action.id]: action.type, id: action.id})
             };
         case actionType.ADD_TO_CART_ACTION:
@@ -44,6 +51,13 @@ function  rootReducer(state, action) {
                     ...state.cart,
                     sum: state.cart.sum + action.price,
                     items: action.items
+                },
+                products: {
+                    ...state.products,
+                    [action.pid]: {
+                        ...state.products[action.pid],
+                        available: state.products[action.pid].available - 1
+                    }
                 },
                 history: state.history.concat({[action.id]: action.type, id: action.id})
             };
@@ -65,6 +79,15 @@ function  rootReducer(state, action) {
                         ...state.products[action.pid],
                         pid: action.pid
                     }
+                },
+                history: state.history.concat({[action.id]: action.type, id: action.id})
+            };
+        case actionType.DELETE_PRODUCT_ACTION:
+            return {
+                ...state,
+                products: {
+                    ...state.products,
+                    ...action.products
                 },
                 history: state.history.concat({[action.id]: action.type, id: action.id})
             };

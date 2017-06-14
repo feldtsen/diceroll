@@ -16,7 +16,7 @@ class History extends Component {
                                     <h3>{item.id}: {item[item.id]}</h3>
                                     {
                                         filter?
-                                            <button>Undo</button>
+                                            <button >Undo</button>
                                             :
                                             ''
                                     }

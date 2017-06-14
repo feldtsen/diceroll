@@ -12,6 +12,7 @@ function ProductView(props) {
                 <h1>{product.title}</h1>
                 <h2>{product.subtitle}</h2>
                 <p>{product.description}</p>
+                <p>Available: {product.available}</p>
                 <p>{product.genre}</p>
                 <p>Age: {product.age}+</p>
                 <p className="price">{product.price},- SEK</p>
