@@ -20,7 +20,7 @@ class History extends Component {
                                     <h3>{item.id}: {item[item.id]}</h3>
                                     {
                                         filter?
-                                            <button name={item.id} onClick={this.timeMachine}>Jump</button>
+                                            <button name={item.id} onClick={this.timeMachine}>Jump to snapshot</button>
                                             :
                                             ''
                                     }
