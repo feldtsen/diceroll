@@ -108,7 +108,7 @@ class Products extends Component {
         const updatedItems = [].concat(items),
         pid = e.target.className,
         price = this.props.products[pid].price;
-        const data = {products: this.props.products, items: [...updatedItems], sum: this.props.sum - this.props.products[pid].price};
+        const data = {products: {...this.props.products, allProducts:[...this.props.products.allProducts]}, items: [...updatedItems], sum: this.props.sum - this.props.products[pid].price};
         const past = [...this.props.past, data];
         this.props.dispatch(removeItemFromCartAction(updatedItems, price, pid, past));
     };
