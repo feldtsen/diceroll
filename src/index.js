@@ -16,6 +16,7 @@ const initialState = {
             loggedIn: false
         },
         history: [],
+        past: [],
         products: {
             0: {
                 pid: 0,
@@ -104,3 +105,10 @@ ReactDOM.render(
     document.getElementById('root')
 );
 registerServiceWorker();
+
+/*
+* legge til/ ta bort -> state til produkter
+* edit -> state til produkter
+* delete -> state til produkter
+*
+* */

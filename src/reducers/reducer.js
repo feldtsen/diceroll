@@ -13,7 +13,8 @@ function  rootReducer(state, action) {
                         pid: action.pid
                     }
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: [...state.past, {}]
             };
         case actionType.TOGGLE_CART_VIEW_ACTION:
             return {
@@ -25,7 +26,9 @@ function  rootReducer(state, action) {
                         open: action.open,
                     }
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: [...state.past, {}]
+
             };
         case actionType.REMOVE_ITEM_FROM_CART_ACTION:
             return {
@@ -42,7 +45,8 @@ function  rootReducer(state, action) {
                         available: state.products[action.pid].available + 1
                     }
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: action.past
             };
         case actionType.ADD_TO_CART_ACTION:
             return {
@@ -59,7 +63,8 @@ function  rootReducer(state, action) {
                         available: state.products[action.pid].available - 1
                     }
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: action.past
             };
         case actionType.LOGIN_ACTION:
             return {
@@ -67,7 +72,9 @@ function  rootReducer(state, action) {
                 fakeAdmin: {
                     loggedIn: action.status
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: [...state.past, {}]
+
             };
         case actionType.ADD_NEW_PRODUCT_ACTION:
             return {
@@ -80,7 +87,8 @@ function  rootReducer(state, action) {
                         pid: action.pid
                     }
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: action.past
             };
         case actionType.DELETE_PRODUCT_ACTION:
             return {
@@ -94,7 +102,8 @@ function  rootReducer(state, action) {
                     items: [],
                     sum: 0
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: action.past
             };
         case actionType.EDIT_PRODUCT_ACTION:
             return {
@@ -103,7 +112,8 @@ function  rootReducer(state, action) {
                     ...state.products,
                     [action.products.pid]: action.products
                 },
-                history: state.history.concat({[action.id]: action.type, id: action.id})
+                history: state.history.concat({[action.id]: action.type, id: action.id}),
+                past: [...state.past, {}]
             };
         case actionType.ITEM_HEIGHT_ACTION:
             return {
@@ -119,6 +129,21 @@ function  rootReducer(state, action) {
                     ...state.meta,
                     historyOpen: action.open
                 }
+            };
+        case actionType.TIME_MACHINE_ACTION:
+            console.log(action);
+            return {
+                ...state,
+                products: {
+                    ...action.capsule.products
+                },
+                cart: {
+                    ...state.cart,
+                    items: [...action.capsule.items],
+                    sum: action.capsule.sum
+                }
+
+
             };
         default:
             return {...state};

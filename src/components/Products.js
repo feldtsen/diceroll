@@ -108,17 +108,20 @@ class Products extends Component {
         const updatedItems = [].concat(items),
         pid = e.target.className,
         price = this.props.products[pid].price;
-
-        this.props.dispatch(removeItemFromCartAction(updatedItems, price, pid));
+        const data = {products: this.props.products, items: [...updatedItems], sum: this.props.sum - this.props.products[pid].price};
+        const past = [...this.props.past, data];
+        this.props.dispatch(removeItemFromCartAction(updatedItems, price, pid, past));
     };
 
     addToCart = (e) => {
         let items = this.props.items;
         const pid = e.target.name;
         if(this.props.products[pid].available !== 0){
+            const data = {products: {...this.props.products, allProducts:[...this.props.products.allProducts]}, items: [...this.props.items,  pid], sum: this.props.sum + this.props.products[pid].price};
+            const past = [...this.props.past, data];
             items.push(pid);
             const price = this.props.products[pid].price;
-            this.props.dispatch(addToCartAction(items, price, pid));
+            this.props.dispatch(addToCartAction(items, price, pid, past));
         }
     };
 
@@ -138,7 +141,9 @@ class Products extends Component {
             const products = Object.assign(this.props.products, {[newPid]: newData});
             let allProducts = this.props.products.allProducts;
             allProducts.push(newPid);
-            this.props.dispatch(addNewProductAction(products, newPid));
+            const data = {products: {...this.props.products, [newPid]: {...this.state.product, pid: newPid}, allProducts:[...this.props.products.allProducts]}, items: {...this.props.items}, sum: this.props.sum};
+            const past = [...this.props.past, data];
+            this.props.dispatch(addNewProductAction(products, newPid, past));
         }
     };
 
@@ -148,7 +153,9 @@ class Products extends Component {
         const index = products.allProducts.indexOf(productPid);
         delete products[productPid];
          products.allProducts.splice(index, 1);
-        this.props.dispatch(deleteProductAction(products));
+        const data = {products: {...products, allProducts:[...products.allProducts]}, items: [], sum: 0};
+        const past = [...this.props.past, data];
+        this.props.dispatch(deleteProductAction(products, past));
 
     };
 
@@ -181,13 +188,13 @@ class Products extends Component {
 function mapStateToProps(state){
     return {
         products: state.products,
+        past: state.past,
         viewOpen: state.products.view.open,
         cartOpen: state.cart.view.open,
         sum: state.cart.sum,
         items: state.cart.items,
         fakeAdminStatus: state.fakeAdmin.loggedIn,
         itemHeight: state.meta.height,
-        tempData: state.tempData
     }
 }
 

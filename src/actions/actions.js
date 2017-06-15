@@ -19,23 +19,25 @@ function toggleCartViewAction(viewOpen) {
 
     }
 }
-function removeItemFromCartAction(items, price, pid) {
+function removeItemFromCartAction(items, price, pid, past) {
     return {
         type: actionType.REMOVE_ITEM_FROM_CART_ACTION,
         items,
         price,
         id: count++,
-        pid
+        pid,
+        past
 
     }
 }
-function addToCartAction(items, price, pid) {
+function addToCartAction(items, price, pid, past) {
     return {
         type: actionType.ADD_TO_CART_ACTION,
         items,
         price,
         id: count++,
-        pid
+        pid,
+        past
 
     }
 }
@@ -56,12 +58,13 @@ function itemHeightAction(height) {
     }
 }
 
-function addNewProductAction(products, pid) {
+function addNewProductAction(products, pid, past) {
     return {
         type: actionType.ADD_NEW_PRODUCT_ACTION,
         products,
         pid: Number(pid),
-        id: count++
+        id: count++,
+        past
     }
 }
 
@@ -72,11 +75,12 @@ function historyOpenAction(open) {
     }
 }
 
-function deleteProductAction(products) {
+function deleteProductAction(products, past) {
     return {
         type: actionType.DELETE_PRODUCT_ACTION,
         products,
-        id: count++
+        id: count++,
+        past
     }
 }
 function editProductAction(products) {
@@ -86,6 +90,14 @@ function editProductAction(products) {
         id: count++
     }
 }
+
+function timeMachineAction(capsule) {
+    return {
+        type: actionType.TIME_MACHINE_ACTION,
+        capsule
+    }
+}
+
 export {
     toggleProductViewAction,
     toggleCartViewAction,
@@ -96,5 +108,6 @@ export {
     addNewProductAction,
     historyOpenAction,
     deleteProductAction,
-    editProductAction
+    editProductAction,
+    timeMachineAction
 };
